@@ -167,7 +167,7 @@ public class TicketServiceImplTest {
     @Test(expected = InvalidPurchaseException.class)
     public void test_Verify_InCorrectTicketData_NullTicketType() {
         TicketTypeRequest one = new TicketTypeRequest(null, 1);
-        TicketTypeRequest two = new TicketTypeRequest(TicketTypeRequest.Type.CHILD, 4);
+        TicketTypeRequest two = new TicketTypeRequest(TicketTypeRequest.Type.ADULT, 4);
         TicketTypeRequest three = new TicketTypeRequest(TicketTypeRequest.Type.INFANT, 3);
         Long accountId = 1L;
         ticketService.purchaseTickets(accountId, one, two, three);
