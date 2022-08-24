@@ -175,7 +175,6 @@ public class TicketServiceImplTest {
     @Test(expected = InvalidPurchaseException.class)
     public void test_Verify_CorrectPriceAndSeats_NullBooking() {
         TicketTypeRequest one = new TicketTypeRequest(TicketTypeRequest.Type.ADULT, 9);
-        int expectedPriceOfTickets = 9 * ADULT_TICKET_PRICE ;
         Long accountId = 1L;
         ticketService.purchaseTickets(accountId, one, null );
         verify(seatReservationServiceMock, never()).reserveSeat(accountId, anyInt());
