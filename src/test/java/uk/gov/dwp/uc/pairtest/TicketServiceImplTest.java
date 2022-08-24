@@ -178,7 +178,8 @@ public class TicketServiceImplTest {
         int expectedPriceOfTickets = 9 * ADULT_TICKET_PRICE ;
         Long accountId = 1L;
         ticketService.purchaseTickets(accountId, one, null );
-        verify(seatReservationServiceMock).reserveSeat(accountId, 9);
-        verify(ticketPaymentServiceMock).makePayment(accountId, expectedPriceOfTickets);
+        verify(seatReservationServiceMock, never()).reserveSeat(accountId, anyInt());
+        verify(ticketPaymentServiceMock, never()).makePayment(accountId, anyInt());
     }
+
 }
