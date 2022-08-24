@@ -154,4 +154,21 @@ public class TicketServiceImplTest {
         verify(seatReservationServiceMock, never()).reserveSeat(accountId, anyInt());
         verify(ticketPaymentServiceMock, never()).makePayment(accountId, anyInt());
     }
+
+    @Test(expected = InvalidPurchaseException.class)
+    public void test_Verify_InCorrectTicketData_NullTicketRequests() {
+        Long accountId = 1L;
+        ticketService.purchaseTickets(accountId, null);
+        verify(seatReservationServiceMock, never()).reserveSeat(accountId, anyInt());
+        verify(ticketPaymentServiceMock, never()).makePayment(accountId, anyInt());
+    }
+
+    @Test(expected = InvalidPurchaseException.class)
+    public void test_Verify_InCorrectTicketData_NullAccountId() {
+        TicketTypeRequest one = new TicketTypeRequest(TicketTypeRequest.Type.ADULT, 3);
+        Long accountId = null;
+        ticketService.purchaseTickets(accountId, one);
+        verify(seatReservationServiceMock, never()).reserveSeat(accountId, anyInt());
+        verify(ticketPaymentServiceMock, never()).makePayment(accountId, anyInt());
+    }
 }
