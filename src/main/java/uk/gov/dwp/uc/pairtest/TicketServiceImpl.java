@@ -9,6 +9,7 @@ import uk.gov.dwp.uc.pairtest.exception.InvalidPurchaseException;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static uk.gov.dwp.uc.pairtest.TicketConstants.*;
 
@@ -56,6 +57,12 @@ public class TicketServiceImpl implements TicketService {
         if(accountId == null) {
             throw new InvalidPurchaseException("AccountId cannot be null");
         }
+
+        boolean nullPresence = Arrays.stream(ticketTypeRequests).anyMatch(s -> (s == null));
+        if(nullPresence) {
+            throw new InvalidPurchaseException("Ticket Request cannot be null");
+        }
+
 
         Optional<Integer> inValidTickets = Arrays.stream(ticketTypeRequests).map(TicketTypeRequest::getNoOfTickets).filter(t -> (t <= 0)).findAny();
         if (inValidTickets.isPresent()) {
