@@ -58,7 +58,7 @@ public class TicketServiceImpl implements TicketService {
             throw new InvalidPurchaseException("AccountId cannot be null");
         }
 
-        boolean nullPresence = Arrays.stream(ticketTypeRequests).anyMatch(s -> (s == null));
+        boolean nullPresence = Arrays.stream(ticketTypeRequests).anyMatch(s -> ((s == null) || (s.getTicketType() == null)));
         if(nullPresence) {
             throw new InvalidPurchaseException("Ticket Request cannot be null");
         }
